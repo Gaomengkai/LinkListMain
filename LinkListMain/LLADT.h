@@ -7,7 +7,7 @@
 #define OK 1
 #define ERROR 0
 #define INFEASIBLE -1
-#define OVERFLOW -2
+//#define OVERFLOW -2
 #define FILEERROR -3
 
 typedef int status;
