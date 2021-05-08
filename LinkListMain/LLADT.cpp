@@ -7,18 +7,19 @@
 
 status InitList(LinkList& L) {
     /// <summary>
-    /// 线性表L不存在，构造一个空的线性表，返回OK，否则返回INFEASIBLE。
+    /// 1. 线性表L不存在，构造一个空的线性表，返回OK，否则返回INFEASIBLE。
     /// </summary>
     /// <param name="L"></param>
     /// <returns></returns>
     if (L) return INFEASIBLE;
     L = new LNode;
+    L->next = NULL;
     return OK;
 }
 
 status DestroyList(LinkList& L) {
     /// <summary>
-    /// 如果线性表L存在，销毁线性表L，释放数据元素的空间，返回OK，否则返回INFEASIBLE。
+    /// 2. 如果线性表L存在，销毁线性表L，释放数据元素的空间，返回OK，否则返回INFEASIBLE。
     /// </summary>
     /// <param name="L"></param>
     /// <returns></returns>
@@ -32,7 +33,7 @@ status DestroyList(LinkList& L) {
 
 status ClearList(LinkList& L) {
     /// <summary>
-    /// 如果线性表L存在，删除线性表L中的所有元素，返回OK，否则返回INFEASIBLE。
+    /// 3. 如果线性表L存在，删除线性表L中的所有元素，返回OK，否则返回INFEASIBLE。
     /// </summary>
     /// <param name="L"></param>
     /// <returns></returns>
@@ -50,7 +51,7 @@ status ClearList(LinkList& L) {
 
 status ListEmpty(LinkList L) {
     /// <summary>
-    /// 如果线性表L存在，判断线性表L是否为空，空就返回TRUE，否则返回FALSE；如果线性表L不存在，返回INFEASIBLE。
+    /// 4. 如果线性表L存在，判断线性表L是否为空，空就返回TRUE，否则返回FALSE；如果线性表L不存在，返回INFEASIBLE。
     /// </summary>
     /// <param name="L"></param>
     /// <returns></returns>
@@ -59,9 +60,25 @@ status ListEmpty(LinkList L) {
     return FALSE;
 }
 
+int ListLength(LinkList L) {
+    /// <summary>
+    /// 5. 如果线性表L存在，返回线性表L的长度，否则返回INFEASIBLE。
+    /// </summary>
+    /// <param name="L"></param>
+    /// <returns></returns>
+    if (!L) return INFEASIBLE;
+    LinkList t = L->next;
+    int cnt = 0;
+    while (t) {
+        ++cnt;
+        t = t->next;
+    }
+    return cnt;
+}
+
 status GetElem(LinkList L, int i, ElemType& e) {
     /// <summary>
-    /// 如果线性表L存在，获取线性表L的第i个元素，保存在e中，返回OK；
+    /// 6. 如果线性表L存在，获取线性表L的第i个元素，保存在e中，返回OK；
     /// 如果i不合法，返回ERROR；如果线性表L不存在，返回INFEASIBLE。
     /// </summary>
     /// <param name="L"></param>
@@ -85,7 +102,7 @@ status GetElem(LinkList L, int i, ElemType& e) {
 
 status LocateElem(LinkList L, ElemType e) {
     /// <summary>
-    /// 如果线性表L存在，查找元素e在线性表L中的位置序号；如果e不存在，返回ERROR；
+    /// 7. 如果线性表L存在，查找元素e在线性表L中的位置序号；如果e不存在，返回ERROR；
     /// 当线性表L不存在时，返回INFEASIBLE。
     /// </summary>
     /// <param name="L"></param>
@@ -108,7 +125,7 @@ status LocateElem(LinkList L, ElemType e) {
 
 status PriorElem(LinkList L, ElemType e, ElemType& pre) {
     /// <summary>
-    /// 如果线性表L存在，获取线性表L中元素e的前驱，保存在pre中，返回OK；如果没有前驱，返回ERROR；
+    /// 8. 如果线性表L存在，获取线性表L中元素e的前驱，保存在pre中，返回OK；如果没有前驱，返回ERROR；
     /// 如果线性表L不存在，返回INFEASIBLE。
     /// </summary>
     /// <param name="L"></param>
@@ -139,7 +156,7 @@ status PriorElem(LinkList L, ElemType e, ElemType& pre) {
 
 status NextElem(LinkList L, ElemType e, ElemType& next) {
     /// <summary>
-    /// 如果线性表L存在，获取线性表L元素e的后继，保存在next中，返回OK；如果没有后继，
+    /// 9. 如果线性表L存在，获取线性表L元素e的后继，保存在next中，返回OK；如果没有后继，
     /// 返回ERROR；如果线性表L不存在，返回INFEASIBLE。
     /// </summary>
     /// <param name="L"></param>
@@ -168,7 +185,7 @@ status NextElem(LinkList L, ElemType e, ElemType& next) {
 status ListInsert(LinkList& L, int i, ElemType e) {
 
     /// <summary>
-    /// 如果线性表L存在，将元素e插入到线性表L的第i个元素之前，返回OK；
+    /// 10. 如果线性表L存在，将元素e插入到线性表L的第i个元素之前，返回OK；
     /// 当插入位置不正确时，返回ERROR；如果线性表L不存在，返回INFEASIBLE。
     /// </summary>
     /// <param name="L"></param>
@@ -201,7 +218,7 @@ status ListInsert(LinkList& L, int i, ElemType e) {
 
 status ListDelete(LinkList& L, int i, ElemType& e) {
     /// <summary>
-    /// 如果线性表L存在，删除线性表L的第i个元素，并保存在e中，返回OK；
+    /// 11. 如果线性表L存在，删除线性表L的第i个元素，并保存在e中，返回OK；
     /// 当删除位置不正确时，返回ERROR；如果线性表L不存在，返回INFEASIBLE。
     /// </summary>
     /// <param name="L"></param>
@@ -233,7 +250,7 @@ status ListDelete(LinkList& L, int i, ElemType& e) {
 
 status ListTraverse(LinkList L) {
     /// <summary>
-    /// 如果线性表L存在，依次显示线性表中的元素，每个元素间空一格，返回OK；
+    /// 12. 如果线性表L存在，依次显示线性表中的元素，每个元素间空一格，返回OK；
     /// 如果线性表L不存在，返回INFEASIBLE。
     /// </summary>
     /// <param name="L"></param>
@@ -251,7 +268,7 @@ status ListTraverse(LinkList L) {
 
 status SaveList(LinkList L, char FileName[]) {
     /// <summary>
-    /// 如果线性表L存在，将线性表L的的元素写到FileName文件中，返回OK，否则返回INFEASIBLE。
+    /// 13. 如果线性表L存在，将线性表L的的元素写到FileName文件中，返回OK，否则返回INFEASIBLE。
     /// </summary>
     /// <param name="L"></param>
     /// <param name="FileName"></param>
@@ -259,6 +276,7 @@ status SaveList(LinkList L, char FileName[]) {
     if (!L) return INFEASIBLE;
     LinkList t = L->next;
     FILE* fp = fopen(FileName, "w");
+    if (fp == NULL)return FILEERROR;
     while (t) {
         fprintf(fp, "%d ", t->data);
         t = t->next;
@@ -269,7 +287,7 @@ status SaveList(LinkList L, char FileName[]) {
 
 status LoadList(LinkList& L, char FileName[]) {
     /// <summary>
-    /// 如果线性表L不存在，将FileName文件中的数据读入到线性表L中，返回OK，否则返回INFEASIBLE。
+    /// 14. 如果线性表L不存在，将FileName文件中的数据读入到线性表L中，返回OK，否则返回INFEASIBLE。
     /// </summary>
     /// <param name="L"></param>
     /// <param name="FileName"></param>

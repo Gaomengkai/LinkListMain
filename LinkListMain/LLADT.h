@@ -8,6 +8,7 @@
 #define ERROR 0
 #define INFEASIBLE -1
 #define OVERFLOW -2
+#define FILEERROR -3
 
 typedef int status;
 typedef int ElemType; //数据元素类型定义
@@ -20,11 +21,18 @@ typedef struct LNode {  //单链表（链式结构）结点的定义
     struct LNode* next;
 }LNode, * LinkList;
 
+
+
+
+
+
+
 // Functions Define
 status InitList(LinkList& L);
 status DestroyList(LinkList& L);
 status ClearList(LinkList& L);
 status ListEmpty(LinkList L);
+status ListLength(LinkList L);
 status GetElem(LinkList L, int i, ElemType& e);
 status LocateElem(LinkList L, ElemType e);
 status PriorElem(LinkList L, ElemType e, ElemType& pre);
